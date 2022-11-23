@@ -1,10 +1,9 @@
 import { Link } from "react-router-dom";
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import { Nav, SectionImg, DivInput, DivA, Button } from "./Styled";
-import {AuthContext} from "../Components/Auth";
 
 export default function HomePageCadastro() {
 
@@ -12,7 +11,6 @@ export default function HomePageCadastro() {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [name, setName] = useState("");
-    const {REACT_APP_API_BASE_URL} = useContext(AuthContext);
 
     let navigate = useNavigate();
 
@@ -27,7 +25,7 @@ export default function HomePageCadastro() {
             confirmPassword
         };
 
-        const promise = axios.post("https://vinho-ecommerce.onrender.com/sign-up", registration);
+        const promise = axios.post(`${process.env.REACT_APP_API_BASE_URL}/sign-up`, registration);
 
         promise.then((resp => { alert('Parabéns por ter criado sua conta'); navigate("/");}));
 
