@@ -12,7 +12,7 @@ export default function HomePage(){
     const [password, setPassword] = useState("");
     let navigate = useNavigate();
 
-    const {setToken, REACT_APP_API_BASE_URL} = useContext(AuthContext);
+    const {setToken} = useContext(AuthContext);
 
     function signIn(event){
 
@@ -23,11 +23,11 @@ export default function HomePage(){
             password
         };
 
-        const promise = axios.post(`${REACT_APP_API_BASE_URL}/sign-in`, login);
+        const promise = axios.post(`${process.env.REACT_APP_API_BASE_URL}/sign-in`, login);
 
         promise.then((resp => {setToken(resp.data); navigate("/home")}));
 
-        promise.catch((err => {alert(err.response.data); alert("nem mandou pro bd")}));
+        promise.catch((err => {console.log(err); alert("nem mandou pro bd")}));
     }
 
     return (
