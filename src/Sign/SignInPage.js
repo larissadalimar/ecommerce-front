@@ -23,9 +23,11 @@ export default function HomePage(){
             password
         };
 
+        console.log(login)
+
         const promise = axios.post(`${process.env.REACT_APP_API_BASE_URL}/sign-in`, login);
 
-        promise.then((resp => {setToken(resp.data); navigate("/home")}));
+        promise.then((resp => {alert("deu certo entrar"); setToken(resp.data); navigate("/home")}));
 
         promise.catch((err => {console.log(err); alert("nem mandou pro bd")}));
     }
@@ -34,7 +36,7 @@ export default function HomePage(){
         <>
             <Nav>
                 <SectionImg>
-                    <h1> MyWallet </h1>
+                    <h1> WineDrop </h1>
                 </SectionImg>
 
                 <form onSubmit={signIn}>
