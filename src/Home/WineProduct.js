@@ -7,7 +7,12 @@ export default function Wine(){
     const {wineId} = useParams();
 
     useEffect(() => {
-        const promise = axios.get(`${process.env.REACT_APP_API_BASE_URL}/products/${wineId}`);
+
+        const body = {
+            wineId
+        }
+        
+        const promise = axios.get(`${process.env.REACT_APP_API_BASE_URL}/wine`, body);
 
         promise.then((res) => {setWine(res.data)});
 
