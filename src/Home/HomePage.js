@@ -49,11 +49,7 @@ export default function HomePage(){
             <Nav>
                 <ProductsSection>
                    {products?.map((item, i) => <WineList item={item} key={i}/>)}
-                   {/* {products?.map(item => 
-                        <Link to={"/wine" + item.id} key={item.id}>
-                            <WineList item={item}/> 
-                        </Link>                       
-                    )} */}
+                   
                 </ProductsSection>     
             </Nav>
 

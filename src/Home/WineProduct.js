@@ -9,20 +9,22 @@ export default function Wine(){
     useEffect(() => {
 
         const body = {
-            wineId
+            id: wineId
         }
-        
+
+        console.log(body);
+
         const promise = axios.get(`${process.env.REACT_APP_API_BASE_URL}/wine`, body);
 
-        promise.then((res) => {setWine(res.data)});
+        promise.then((res) => {setWine(res.data.wine)});
 
         promise.catch((err) => {console.log(err.response.data)})
 
-    }, [])
+    }, [wineId]);
 
     return (
         <h1> 
-            {wine.name}
+           oi
         </h1>
     )
 }
