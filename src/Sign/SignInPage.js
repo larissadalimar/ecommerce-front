@@ -27,14 +27,14 @@ export default function HomePage(){
 
         promise.then((resp => {setToken(resp.data); navigate("/home")}));
 
-        promise.catch((err => {alert(err.response.data); alert("nem mandou pro bd")}));
+        promise.catch((err => {console.log(err)}));
     }
 
     return (
         <>
             <Nav>
                 <SectionImg>
-                    <h1> MyWallet </h1>
+                    <h1> WineDrop </h1>
                 </SectionImg>
 
                 <form onSubmit={signIn}>
