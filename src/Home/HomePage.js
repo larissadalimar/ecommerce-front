@@ -2,8 +2,9 @@ import styled from "styled-components";
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-import {AuthContext} from "../Components/Auth"
+import {AuthContext} from "../Components/Auth";
 import WineList from "./WineList";
 
 
@@ -30,10 +31,11 @@ export default function HomePage(){
         promise.catch(err => {alert("Seu tempo expirou!"); navigate("/"); window.location.reload()});
 
         function catchWines(resp){
+            console.log("entrou na func")
             setProducts(resp.data.wines);
             setUser(resp.data.user);
         }
-        
+
     }, [token, navigate]);
 
     return (
@@ -47,6 +49,11 @@ export default function HomePage(){
             <Nav>
                 <ProductsSection>
                    {products?.map((item, i) => <WineList item={item} key={i}/>)}
+                   {/* {products?.map(item => 
+                        <Link to={"/wine" + item.id} key={item.id}>
+                            <WineList item={item}/> 
+                        </Link>                       
+                    )} */}
                 </ProductsSection>     
             </Nav>
 
@@ -93,6 +100,11 @@ const Footer = styled.footer`
     width: 100%;
     height: 80px;
     & ion-icon{
+        font-size: 50px;
+        color: white;
+    }
+    & h3{
+        font-family: 'Saira Stencil One';
         font-size: 50px;
         color: white;
     }

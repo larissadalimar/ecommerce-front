@@ -1,12 +1,16 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export default function WineList({item}){
     return (
         <>
-             <WineDiv>
-                <img src={item.image} alt={"vinho"}/>
-                <h2> {item.name}</h2>
-                <h6> R$: {item.value} </h6>
+            
+            <WineDiv>
+                <Link to={`/wine/${item._id}`}>
+                    <img src={item.image} alt={"vinho"}/>
+                    <h2> {item.name}</h2>
+                    <h6> R$: {item.value} </h6>
+                </Link>
             </WineDiv>
         </>
     )
