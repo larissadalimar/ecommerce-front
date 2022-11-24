@@ -16,7 +16,7 @@ export default function Wine(){
 
         const promise = axios.get(`${process.env.REACT_APP_API_BASE_URL}/wine`, body);
 
-        promise.then((res) => {setWine(res.data.wine); console.log(res.data)});
+        promise.then((res) => {setWine(res.data)});
 
         promise.catch((err) => {console.log(err.response.data)})
 
@@ -25,6 +25,7 @@ export default function Wine(){
     return (
         <h1> 
            oi
+           {wine.name}
         </h1>
     )
 }
