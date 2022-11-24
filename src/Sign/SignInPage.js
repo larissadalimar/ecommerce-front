@@ -23,8 +23,6 @@ export default function HomePage(){
             password
         };
 
-        console.log(login)
-
         const promise = axios.post(`${process.env.REACT_APP_API_BASE_URL}/sign-in`, login);
 
         promise.then((resp => {setToken(resp.data); navigate("/home")}));
