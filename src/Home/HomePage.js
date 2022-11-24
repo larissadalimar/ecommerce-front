@@ -1,9 +1,43 @@
 import styled from "styled-components";
+import { useState, useEffect, useContext } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
+import {AuthContext} from "../Components/Auth"
+import WineList from "./WineList";
+
 
 export default function HomePage(){
+
+    const { token } = useContext(AuthContext);
+    
+    const [products, setProducts] = useState([]);
+    const [user, setUser] = useState([]); 
+    let navigate = useNavigate();
+
+    useEffect(() => {
+
+        const config = {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        };
+        
+        const promise = axios.get(`${process.env.REACT_APP_API_BASE_URL}/products`, config);
+
+        promise.then(catchWines);
+
+        promise.catch(err => {alert("Seu tempo expirou!"); navigate("/"); window.location.reload()});
+
+        function catchWines(resp){
+            setProducts(resp.data.wines);
+            setUser(resp.data.user);
+        }
+        
+    }, [token, navigate]);
+
     return (
-        <>
-            
+        <>           
             <section>
                 <TitleDiv>
                     <h1>WineDrop</h1>
@@ -12,67 +46,13 @@ export default function HomePage(){
 
             <Nav>
                 <ProductsSection>
-                    <WineDiv>
-                        <img src={"https://www.wine.com.br/cdn-cgi/image/q=99,f=png,h=176/assets-images/produtos/20884-01.png"} alt={"vinho"}/>
-                        <h2> Davideira</h2>
-                        <p> vinho </p>
-                        <h6>R$: 64,90 </h6>
-                    </WineDiv>
-
-                    <WineDiv>
-                        <img src={"https://www.wine.com.br/cdn-cgi/image/q=99,f=png,h=176/assets-images/produtos/20884-01.png"} alt={"vinho"}/>
-                        <h2> Davideira</h2>
-                        <p> vinho bão dms </p>
-                        <h6>R$: 64,90 </h6>
-                    </WineDiv>
-
-                    <WineDiv>
-                        <img src={"https://www.wine.com.br/cdn-cgi/image/q=99,f=png,h=176/assets-images/produtos/20884-01.png"} alt={"vinho"}/>
-                        <h2> Davideira</h2>
-                        <p> vinho </p>
-                        <h6>R$: 64,90 </h6>
-                    </WineDiv>
-
-                    <WineDiv>
-                        <img src={"https://www.wine.com.br/cdn-cgi/image/q=99,f=png,h=176/assets-images/produtos/20884-01.png"} alt={"vinho"}/>
-                        <h2> Davideira</h2>
-                        <p> vinho bão dms </p>
-                        <h6>R$: 64,90 </h6>
-                    </WineDiv>
-
-                    <WineDiv>
-                        <img src={"https://www.wine.com.br/cdn-cgi/image/q=99,f=png,h=176/assets-images/produtos/20884-01.png"} alt={"vinho"}/>
-                        <h2> Davideira</h2>
-                        <p> vinho </p>
-                        <h6>R$: 64,90 </h6>
-                    </WineDiv>
-
-                    <WineDiv>
-                        <img src={"https://www.wine.com.br/cdn-cgi/image/q=99,f=png,h=176/assets-images/produtos/20884-01.png"} alt={"vinho"}/>
-                        <h2> Davideira</h2>
-                        <p> vinho bão dms </p>
-                        <h6>R$: 64,90 </h6>
-                    </WineDiv>
-
-                    <WineDiv>
-                        <img src={"https://www.wine.com.br/cdn-cgi/image/q=99,f=png,h=176/assets-images/produtos/20884-01.png"} alt={"vinho"}/>
-                        <h2> Davideira</h2>
-                        <p> vinho </p>
-                        <h6>R$: 64,90 </h6>
-                    </WineDiv>
-
-                    <WineDiv>
-                        <img src={"https://www.wine.com.br/cdn-cgi/image/q=99,f=png,h=176/assets-images/produtos/20884-01.png"} alt={"vinho"}/>
-                        <h2> Davideira</h2>
-                        <p> vinho bão dms </p>
-                        <h6>R$: 64,90 </h6>
-                    </WineDiv>
-
+                   {products?.map((item, i) => <WineList item={item} key={i}/>)}
                 </ProductsSection>     
             </Nav>
 
             <Footer>
                     <ion-icon name="cart"></ion-icon>
+                    <h3> Ola, {user}</h3>
                     <ion-icon name="log-in-outline"></ion-icon>
             </Footer>
         </>
@@ -81,6 +61,7 @@ export default function HomePage(){
 
 const Nav = styled.nav`
     padding: 20px;
+    margin-bottom: 70px;
 `
 
 const TitleDiv = styled.div`
@@ -102,17 +83,6 @@ const ProductsSection = styled.section`
     flex-wrap: wrap;
 `
 
-const WineDiv = styled.div`
-    background-color: #c6c6c6;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 130px;
-    border: 2px solid #322938;
-    margin: 10px;
-`
-
 const Footer = styled.footer`
     background-color: #322938;
     display: flex;
@@ -126,6 +96,4 @@ const Footer = styled.footer`
         font-size: 50px;
         color: white;
     }
-
-
 `
