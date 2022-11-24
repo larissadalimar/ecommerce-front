@@ -2,7 +2,6 @@ import styled from "styled-components";
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
 
 import {AuthContext} from "../Components/Auth";
 import WineList from "./WineList";
@@ -31,7 +30,6 @@ export default function HomePage(){
         promise.catch(err => {alert("Seu tempo expirou!"); navigate("/"); window.location.reload()});
 
         function catchWines(resp){
-            console.log("entrou na func")
             setProducts(resp.data.wines);
             setUser(resp.data.user);
         }
@@ -48,8 +46,7 @@ export default function HomePage(){
 
             <Nav>
                 <ProductsSection>
-                   {products?.map((item, i) => <WineList item={item} key={i}/>)}
-                   
+                   {products?.map((item, i) => <WineList item={item} key={i}/>)}                  
                 </ProductsSection>     
             </Nav>
 
