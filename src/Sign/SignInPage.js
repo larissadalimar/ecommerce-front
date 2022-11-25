@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { useState, useContext} from "react";
 import { useNavigate } from "react-router-dom";
+import { ThreeDots } from "react-loader-spinner";
 
 import {Nav, SectionImg, DivInput, DivA, Button} from "./Styled";
 import {AuthContext} from "../Components/Auth";
@@ -10,6 +11,8 @@ export default function HomePage(){
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [habilit, setHabilit] = useState(false);
+    const [disabled, setDisabled] = useState(false);
     let navigate = useNavigate();
 
     const {setToken} = useContext(AuthContext);
@@ -17,6 +20,9 @@ export default function HomePage(){
     function signIn(event){
 
         event.preventDefault();
+
+        setHabilit(true);
+        setDisabled(true);
 
         const login = {
             email,
@@ -27,7 +33,7 @@ export default function HomePage(){
 
         promise.then((resp => {setToken(resp.data); navigate("/home")}));
 
-        promise.catch((err => {console.log(err)}));
+        promise.catch((err => {alert(err.response.data.message); setHabilit(false); setDisabled(false)}));
     }
 
     return (
@@ -39,9 +45,9 @@ export default function HomePage(){
 
                 <form onSubmit={signIn}>
                     <DivInput >
-                        <input placeholder="E-mail" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required></input>
-                        <input placeholder="Senha" type="password" value={password} onChange={(e) => setPassword(e.target.value)} required></input>
-                        <Button type="submit"> Entrar </Button>
+                        <input disabled={disabled} placeholder="E-mail" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required></input>
+                        <input disabled={disabled} placeholder="Senha" type="password" value={password} onChange={(e) => setPassword(e.target.value)} required></input>
+                        <Button disabled={disabled} type="submit"> {!habilit ? "Entrar" : <ThreeDots color={"white"}/>} </Button>
                     </DivInput>
                 </form>
 
