@@ -60,19 +60,22 @@ export default function HomePage(){
 }
 
 const Nav = styled.nav`
-    padding: 20px;
+    padding: 15px;
     margin-bottom: 70px;
 `
 
 const TitleDiv = styled.div`
-    height: 50px;
+    width: 100%;
+    height: 70px;
     display: flex;
     justify-content: center;
     align-items: center;
     font-family: 'Saira Stencil One';
     font-size: 40px;
     color: #322938;
-
+    position: fixed;
+    top: 0;
+	background-color: #31684A;
 `
 
 const ProductsSection = styled.section`
@@ -81,6 +84,9 @@ const ProductsSection = styled.section`
     align-items: center;
     background-color: white;
     flex-wrap: wrap;
+    margin-top: 55px;
+    border-radius: 5px;
+    border: 5px solid #322938;
 `
 
 const Footer = styled.footer`
