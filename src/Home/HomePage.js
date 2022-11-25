@@ -52,7 +52,7 @@ export default function HomePage(){
 
             <Footer>
                     <ion-icon name="cart"></ion-icon>
-                    <h3> Ola, {user}</h3>
+                    <h3> | Ola, {user} |</h3>
                     <ion-icon name="log-in-outline"></ion-icon>
             </Footer>
         </>
@@ -71,7 +71,7 @@ const TitleDiv = styled.div`
     justify-content: center;
     align-items: center;
     font-family: 'Saira Stencil One';
-    font-size: 40px;
+    font-size: 60px;
     color: #322938;
     position: fixed;
     top: 0;
@@ -84,7 +84,7 @@ const ProductsSection = styled.section`
     align-items: center;
     background-color: white;
     flex-wrap: wrap;
-    margin-top: 55px;
+    margin-top: 60px;
     border-radius: 5px;
     border: 5px solid #322938;
 `
@@ -99,12 +99,14 @@ const Footer = styled.footer`
     width: 100%;
     height: 80px;
     & ion-icon{
-        font-size: 50px;
+        font-size: 45px;
         color: white;
+        //background-color: #31684A;
+        border-radius: 10px;
     }
     & h3{
         font-family: 'Saira Stencil One';
-        font-size: 50px;
+        font-size: 40px;
         color: white;
     }
 `
