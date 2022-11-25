@@ -44,7 +44,7 @@ export default function Wine(){
                     <p> R$ {wine.value}</p>
                 </SectionValue>
 
-                <Button> comprar </Button>
+                <Button> Adicionar ao carrinho </Button>
             </Nav>
         </>
     )

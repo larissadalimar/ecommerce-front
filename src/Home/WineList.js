@@ -7,7 +7,7 @@ export default function WineList({item}){
         <>          
             <WineDiv>
                 <Link to={`/wine/${item._id}`}>
-                    <img src={item.image} alt={"vinho"}/>
+                    <Img src={item.image} alt={"vinho"}/>
                     <H2> {item.name}</H2>
                     <H6> R$: {item.value} </H6>
                 </Link>
@@ -34,12 +34,18 @@ const WineDiv = styled.div`
     }   
 `
 
+const Img = styled.img`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`
+
 const H2 = styled.h2`
     display: flex;
     justify-content: center;
     text-align: center;
     flex-wrap: wrap;
-    padding: 50px;
+    padding: 5px;
 `
 
 const H6 = styled.h6`
