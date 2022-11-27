@@ -59,12 +59,12 @@ export default function HomePage(){
     )
 }
 
-const Nav = styled.nav`
+export const Nav = styled.nav`
     padding: 20px;
     margin-bottom: 70px;
 `
 
-const TitleDiv = styled.div`
+export const TitleDiv = styled.div`
     height: 50px;
     display: flex;
     justify-content: center;
@@ -75,7 +75,7 @@ const TitleDiv = styled.div`
 
 `
 
-const ProductsSection = styled.section`
+export const ProductsSection = styled.section`
     display: flex;
     justify-content: center;
     align-items: center;
@@ -83,7 +83,7 @@ const ProductsSection = styled.section`
     flex-wrap: wrap;
 `
 
-const Footer = styled.footer`
+export const Footer = styled.footer`
     background-color: #322938;
     display: flex;
     justify-content: space-between;
