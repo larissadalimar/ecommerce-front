@@ -23,7 +23,7 @@ export default function Cart(){
 
         promise.then((res) => {
             if(res.data.products){
-                setCart(res.data.products)
+                setCart(res.data)
             }else{
                 alert(res.data) 
                 navigate("/home")
@@ -34,14 +34,31 @@ export default function Cart(){
 
     }, [cart])
 
+    function fecharPedido(){
+        const promise = axios.post(`${process.env.REACT_APP_API_BASE_URL}/complete-purchase`, {
+            payment: "payment",
+            cart
+        }, {
+            headers : {
+                Authorization: `Bearer ${user.token}`
+            }
+        })
+
+        promise.then((res) => alert(res.data))
+
+        promise.catch((err) => console.log(err))
+    }
+
     return(
         <>
             <TitleDiv>
                 <h1 className="cart">Carrinho</h1>
             </TitleDiv>
             <CartContainer className="cart-products">
-                {cart?.map((product, index) => <ProductCart key={index} product={product}/>)}
+                {cart?.products.map((product, index) => <ProductCart key={index} product={product}/>)}
+                <h3>Valor total da compra: {cart.value}</h3>
             </CartContainer>
+            <button onClick={fecharPedido}> Fechar Pedido </button>
             <FooterHome/>
         </>
     )
