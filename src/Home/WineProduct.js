@@ -1,11 +1,16 @@
 import axios from "axios";
+import { useContext } from "react";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
+import { AuthContext } from "../Components/Auth";
 
 export default function Wine(){
     const [wine, setWine] = useState([]);
     const {wineId} = useParams();
+    const navigate = useNavigate();
+
+    const { user } = useContext(AuthContext);
 
     useEffect(() => {
 
@@ -22,11 +27,24 @@ export default function Wine(){
 
     }, [wineId]);
 
+
+    function addInCart(){
+
+        const promise = axios.put(`${process.env.REACT_APP_API_BASE_URL}/add-product-cart`, {productId: wine._id}, 
+        { headers: {
+            Authorization: `Bearer ${user.token}`
+        }})
+
+        promise.then((res) => { navigate("/home")})
+
+        promise.catch((err) => console.log(err))
+    }
+
     return (
         <>  
             <Nav>
                 <SectionImg>
-                    <img src={wine.image}/>
+                    <img src={wine.image} alt={wine.name}/>
                 </SectionImg>
 
                 <SectionName>
@@ -44,7 +62,7 @@ export default function Wine(){
                     <p> R$ {wine.value}</p>
                 </SectionValue>
 
-                <Button> comprar </Button>
+                <Button onClick={addInCart}> comprar </Button>
             </Nav>
         </>
     )
