@@ -33,7 +33,7 @@ export default function HomePage(){
 
         promise.then((resp => {setUser(resp.data); navigate("/home")}));
 
-        promise.catch((err => {alert(err.response.data.message); setHabilit(false); setDisabled(false)}));
+        promise.catch((err => {alert(err.response?.data.message); setHabilit(false); setDisabled(false)}));
     }
 
     return (

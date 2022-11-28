@@ -22,10 +22,12 @@ export default function Cart(){
         })
 
         promise.then((res) => {
-            res.data.products?
-                setCart(res.data.products) :
-                alert(res.data);
-                navigate("/home");  
+            if(res.data.products){
+                setCart(res.data.products)
+            }else{
+                alert(res.data) 
+                navigate("/home")
+            }
         })
 
         promise.catch((err) => console.log(err))
@@ -46,5 +48,5 @@ export default function Cart(){
 }
 
 const CartContainer = styled.div`
-    margin: 3% 5% 20% 5%;
+    margin: 8% 5% 20% 5%;
 `
