@@ -29,12 +29,14 @@ const Footer = styled.footer`
     width: 100%;
     height: 80px;
     & ion-icon{
-        font-size: 50px;
+        font-size: 45px;
         color: white;
+        //background-color: #31684A;
+        border-radius: 10px;
     }
     & h3{
         font-family: 'Saira Stencil One';
-        font-size: 50px;
+        font-size: 40px;
         color: white;
     }
 `
