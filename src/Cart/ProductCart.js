@@ -25,27 +25,30 @@ export default function ProductCart(props){
     }
 
     return(
-        <CartStyle>
-            <div className="product-info">
-                <img className="image-product" src={image} alt={name}/>
-                <div>
-                    <h3 className="product-name">{name}</h3>
-                    <br/>
-                    <h2 className="product-value"> R$ {value}</h2>
+        <>
+            <CartStyle>
+                <div className="product-info">
+                    <img className="image-product" src={image} alt={name}/>
+                    <div>
+                        <h3 className="product-name">{name}</h3>
+                        <br/>
+                        <h2 className="product-value"> R$ {value}</h2>
+                    </div>
                 </div>
-            </div>
-            <div>
-                <ion-icon name="trash-sharp" onClick={deleteProductCart}></ion-icon>
-            </div>
-        </CartStyle>
+                <div>
+                    <ion-icon name="trash-sharp" onClick={deleteProductCart}></ion-icon>
+                </div>
+            </CartStyle>
+        </>
     )
 }
+
 
 const CartStyle = styled.div`
 
     width: 100%;
     height: 100px;
-
+    
     background-color: white;
     border-radius: 5px;
 
@@ -73,5 +76,6 @@ const CartStyle = styled.div`
     ion-icon {
         width: 20px;
         height: 50px;
+        cursor: pointer;
     }
 `
