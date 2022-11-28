@@ -15,7 +15,7 @@ export default function HomePage(){
     const [disabled, setDisabled] = useState(false);
     let navigate = useNavigate();
 
-    const {setToken} = useContext(AuthContext);
+    const { setUser } = useContext(AuthContext);
 
     function signIn(event){
 
@@ -31,9 +31,9 @@ export default function HomePage(){
 
         const promise = axios.post(`${process.env.REACT_APP_API_BASE_URL}/sign-in`, login);
 
-        promise.then((resp => {setToken(resp.data); navigate("/home")}));
+        promise.then((resp => {setUser(resp.data); navigate("/home")}));
 
-        promise.catch((err => {alert(err.response.data.message); setHabilit(false); setDisabled(false)}));
+        promise.catch((err => {alert(err.response?.data.message); setHabilit(false); setDisabled(false)}));
     }
 
     return (

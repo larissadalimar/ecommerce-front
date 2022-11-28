@@ -1,25 +1,25 @@
 import styled from "styled-components";
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
-
 import {AuthContext} from "../Components/Auth";
 import WineList from "./WineList";
+import { useNavigate } from "react-router-dom";
+import FooterHome from "./FooterHome";
 
 
 export default function HomePage(){
 
-    const { token } = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
     
     const [products, setProducts] = useState([]);
-    const [user, setUser] = useState([]); 
-    let navigate = useNavigate();
+
+    const navigate = useNavigate()
 
     useEffect(() => {
 
         const config = {
             headers: {
-                Authorization: `Bearer ${token}`
+                Authorization: `Bearer ${user.token}`
             }
         };
         
@@ -30,11 +30,10 @@ export default function HomePage(){
         promise.catch(err => {alert("Seu tempo expirou!"); navigate("/"); window.location.reload()});
 
         function catchWines(resp){
-            setProducts(resp.data.wines);
-            setUser(resp.data.user);
+            setProducts(resp.data.wines)
         }
 
-    }, [token, navigate]);
+    }, [user, navigate]);
 
     return (
         <>           
@@ -50,11 +49,7 @@ export default function HomePage(){
                 </ProductsSection>     
             </Nav>
 
-            <Footer>
-                    <ion-icon name="cart"></ion-icon>
-                    <h3> | Ola, {user} |</h3>
-                    <ion-icon name="log-in-outline"></ion-icon>
-            </Footer>
+            <FooterHome />
         </>
     )
 }
@@ -64,7 +59,7 @@ const Nav = styled.nav`
     margin-bottom: 70px;
 `
 
-const TitleDiv = styled.div`
+export const TitleDiv = styled.div`
     width: 100%;
     height: 70px;
     display: flex;
@@ -87,26 +82,4 @@ const ProductsSection = styled.section`
     margin-top: 60px;
     border-radius: 5px;
     border: 5px solid #322938;
-`
-
-const Footer = styled.footer`
-    background-color: #322938;
-    display: flex;
-    justify-content: space-between;
-    padding: 20px;
-    position: fixed;
-    bottom:0;
-    width: 100%;
-    height: 80px;
-    & ion-icon{
-        font-size: 45px;
-        color: white;
-        //background-color: #31684A;
-        border-radius: 10px;
-    }
-    & h3{
-        font-family: 'Saira Stencil One';
-        font-size: 40px;
-        color: white;
-    }
 `
