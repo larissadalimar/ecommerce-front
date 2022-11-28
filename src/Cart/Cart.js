@@ -49,4 +49,5 @@ export default function Cart(){
 
 const CartContainer = styled.div`
     margin: 8% 5% 20% 5%;
+    margin-top: 90px;
 `

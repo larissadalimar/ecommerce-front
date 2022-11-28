@@ -1,12 +1,35 @@
 import { useContext } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate} from "react-router-dom"
 import styled from "styled-components"
 import { AuthContext } from "../Components/Auth"
+import axios from "axios"
  
 
 export default function FooterHome(){
 
-    const { user } = useContext(AuthContext)
+    const { user } = useContext(AuthContext);
+    let navigate = useNavigate();
+
+    function logOut(){
+        
+        const config = {
+            headers: {
+                Authorization: `Bearer ${user.token}`
+            }
+        };
+
+        const promise = axios.delete(`${process.env.REACT_APP_API_BASE_URL}/sessions`, config);
+
+        promise.then((res) => {
+            navigate("/");
+            window.location.reload();
+        });
+
+        promise.catch((err) => {
+            navigate("/");
+            window.location.reload();
+        });
+    }
 
     return (
         <Footer>
@@ -14,7 +37,7 @@ export default function FooterHome(){
                 <ion-icon name="cart"></ion-icon>
             </Link>
             <h3> Olá, {user.name}</h3>
-            <ion-icon name="log-in-outline"></ion-icon>
+            <ion-icon onClick={logOut} name="log-in-outline"></ion-icon>
         </Footer>
     )
 }
@@ -31,8 +54,8 @@ const Footer = styled.footer`
     & ion-icon{
         font-size: 45px;
         color: white;
-        //background-color: #31684A;
         border-radius: 10px;
+        cursor: pointer;
     }
     & h3{
         font-family: 'Saira Stencil One';
